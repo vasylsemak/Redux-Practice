@@ -11,6 +11,11 @@ export function createBalloonsErrorAction(error) {
   return { type: BALLOONS_ERROR, error };
 }
 
-export function createGetBalloonsThunk() {
-  // Add your thunk creator here.
+export const createGetBalloonsThunk = () => async (dispatch) => {
+  try {
+    const responce = await axios.get("/balloons");
+    dispatch(createGotBaloonsAction(responce.data));
+  } catch(error) {
+    dispatch(createBalloonsErrorAction(error));
+  }
 }
