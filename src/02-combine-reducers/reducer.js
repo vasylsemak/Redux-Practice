@@ -28,9 +28,16 @@ import {
 //  }
 //}
 
+// {
+//   age: 0,
+//   cash: 0,
+//   posessions: []
+// }
+
 function ageReducer(age = 0, action) {
   switch (action.type) {
-    /* add missing reducer case(s) here */
+    case HAD_A_BIRTHDAY:
+      return age + 1;
     default:
       return age;
   }
@@ -38,7 +45,8 @@ function ageReducer(age = 0, action) {
 
 function possessionsReducer(possessions = [], action) {
   switch (action.type) {
-    /* add missing reducer case(s) here */
+    case BOUGHT_AN_ITEM:
+      return [ ...possessions, action.item ];
     default:
       return possessions;
   }
@@ -46,7 +54,10 @@ function possessionsReducer(possessions = [], action) {
 
 function cashReducer(cash = 0, action) {
   switch (action.type) {
-    /* add missing reducer case(s) here */
+    case RECEIVED_A_PAYCHECK:
+      return cash + action.amountAfterTaxes;
+    case BOUGHT_AN_ITEM:
+      return cash - action.price;
     default:
       return cash;
   }
